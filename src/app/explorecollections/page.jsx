@@ -1,8 +1,10 @@
 "use client";
+import { FaExternalLinkAlt } from 'react-icons/fa';
 import { useState } from "react";
 import Featured1 from '../../../public/Image/Featured1.jpg';
 import Featured2 from '../../../public/Image/Featured2.jpg';
 import Featured3 from '../../../public/Image/Featured3.jpg';
+import { useCurrentAccount } from "@mysten/dapp-kit";
 
 // Use your actual collection data and images
 const collections = [
@@ -34,6 +36,7 @@ const collections = [
 
 export default function ExploreCollectionsPage() {
     const [activeTab, setActiveTab] = useState("collection");
+    const currentAccount = useCurrentAccount();
     const userCollected = []; // Replace with actual user data
     const userActivity = []; // Replace with actual user data
 
@@ -67,13 +70,23 @@ export default function ExploreCollectionsPage() {
                                 <img src={col.image.src} alt={col.title} className="collection-img" />
                                 <div className="collection-title">{col.title}</div>
                                 <div className="collection-desc">{col.shortDesc}</div>
+                                <div className="card-link-icon" onClick={(e) => {
+                                    e.stopPropagation();
+                                    window.location.href = `/collection/${col.id}`;
+                                }}>
+                                    <FaExternalLinkAlt />
+                                </div>
                             </div>
                         ))}
                     </div>
                 )}
 
                 {activeTab === "collected" && (
-                    userCollected.length > 0 ? (
+                    !currentAccount ? (
+                        <div className="empty-state">
+                            <p>Please connect your wallet to view your collected items.</p>
+                        </div>
+                    ) : userCollected.length > 0 ? (
                         <div className="collection-grid">
                             {userCollected.map((col) => (
                                 <div
@@ -84,6 +97,12 @@ export default function ExploreCollectionsPage() {
                                     <img src={col.image.src} alt={col.title} className="collection-img" />
                                     <div className="collection-title">{col.title}</div>
                                     <div className="collection-desc">{col.shortDesc}</div>
+                                    <div className="card-link-icon" onClick={(e) => {
+                                        e.stopPropagation();
+                                        window.location.href = `/collection/${col.id}`;
+                                    }}>
+                                        <FaExternalLinkAlt />
+                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -96,7 +115,11 @@ export default function ExploreCollectionsPage() {
                 )}
 
                 {activeTab === "activity" && (
-                    userActivity.length > 0 ? (
+                    !currentAccount ? (
+                        <div className="empty-state">
+                            <p>Please connect your wallet to view your activity.</p>
+                        </div>
+                    ) : userActivity.length > 0 ? (
                         <div className="activity-table-wrapper">
                             <table className="activity-table">
                                 <thead>

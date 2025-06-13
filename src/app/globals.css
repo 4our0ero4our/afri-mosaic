@@ -20,6 +20,14 @@
   src: url("../../public/Lexend/Lexend-Light.ttf");
 }
 
+section {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+body {
+  background: #101820;
+}
 /* Navbar Stylings */
 .navbar-container {
   position: fixed;
@@ -28,10 +36,10 @@
   width: 100%;
   z-index: 1000;
   background: #101820;
+  border-bottom: 1px solid #232b36;
 }
 
 .desktop-navbar {
-  /* width: 100%; */
   max-width: 1500px;
   margin: 0 auto;
   width: 100%;
@@ -40,15 +48,21 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 2rem;
-  border-bottom: 1px solid #232b36;
-  position: sticky;
-  top: 0;
-  z-index: 100;
 }
 
-.mobileMenu-container,
-.mobileMenu-overlay {
+.mobileMenu {
   display: none;
+  width: 100%;
+  background: #101820;
+  border-bottom: 1px solid #232b36;
+}
+
+.mobileMenu-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  width: 100%;
 }
 
 .navbar-logo-row {
@@ -65,12 +79,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
 }
+
+.navbar-logo:hover {
+  background: #101820;
+  color: #fff;
+}
+
 .navbar-logo-icon {
   color: #000;
   font-size: 1.7rem;
   font-family: "LexendExtraBold", sans-serif;
 }
+
+.navbar-logo:hover .navbar-logo-icon {
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
 .navbar-brand-title {
   font-size: 1.3rem;
   font-family: "LexendBold", sans-serif;
@@ -193,11 +220,13 @@
   .desktop-navbar {
     display: none;
   }
+
+  .mobileMenu {
+    display: block;
+  }
+
   .navbar-container {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 0.5rem 0.5rem;
-    gap: 0.5rem;
+    padding: 0;
   }
   .left {
     flex-direction: column;
@@ -237,17 +266,16 @@
     position: fixed;
     top: 0;
     right: 0;
+    width: 80%;
+    max-width: 400px;
     height: 100vh;
-    width: 70vw;
-    max-width: 350px;
     background: #101820;
-    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
-    transform: translateX(100%);
-    transition: transform 0.2s ease-out;
+    padding: 2rem;
+    z-index: 1001;
     display: flex;
     flex-direction: column;
-    padding: 2rem 1.5rem 1.5rem 1.5rem;
-    z-index: 300;
+    gap: 2rem;
+    border-left: 1px solid #232b36;
   }
   .mobileMenu-overlay.open {
     transform: translateX(0);
@@ -293,10 +321,10 @@
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.2);
-    z-index: 250;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
   }
 }
 
@@ -601,6 +629,7 @@
 }
 .main-content {
   padding-top: 80px;
+  min-height: 100vh;
 }
 
 .hero-loader {
@@ -684,6 +713,8 @@
   /* box-shadow: 0 2px 24px rgba(16, 24, 32, 0.07); */
   /* max-width: 1100px; */
   /* margin: 4rem auto 2rem auto; */
+  max-width: 1500px;
+  margin: 0 auto;
   padding: 2.5rem 2.5rem 1.5rem 2.5rem;
   display: flex;
   flex-direction: column;
@@ -710,8 +741,8 @@
   z-index: 1;
   background: linear-gradient(
     180deg,
-    rgba(16, 24, 32, 0.7) 0%,
-    rgba(16, 24, 32, 0.4) 60%,
+    rgba(199, 204, 208, 0.7) 0%,
+    rgba(147, 156, 165, 0.4) 60%,
     rgba(255, 255, 255, 0.7) 100%
   );
   pointer-events: none;
@@ -990,6 +1021,8 @@
   color: #f3f6fa;
   font-family: "Lexend", "Segoe UI", Arial, sans-serif;
   padding: 2.5rem 1.5rem 3rem 1.5rem;
+  max-width: 1500px;
+  margin: 0 auto;
 }
 
 .main-heading {
@@ -1167,4 +1200,285 @@
     min-width: 320px;
     font-size: 0.9rem;
   }
+}
+
+.collection-detail-root {
+  max-width: 1500px;
+  /* height: 100vh; */
+  margin: 0 auto;
+  padding: 50px 100px;
+  color: #f3f6fa;
+  background: #101820;
+}
+.breadcrumb {
+  color: #b0b8c9;
+  margin-bottom: 1.2rem;
+  font-family: "LexendLight";
+  font-size: 1.1rem;
+}
+.breadcrumb a {
+  color: #6ea1f1;
+  text-decoration: none;
+  font-family: "LexendBold";
+}
+.breadcrumb span {
+  color: #b0b8c9;
+  font-family: "LexendBold";
+}
+.collection-image-wrapper {
+  width: 100%;
+  background: #232b36;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.collection-detail-img {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+  display: block;
+}
+.collection-detail-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.7rem;
+  color: #fff;
+  font-family: "LexendBold";
+}
+.collection-detail-desc {
+  color: #b0b8c9;
+  font-size: 1.08rem;
+  margin-bottom: 2rem;
+  font-family: "LexendLight";
+}
+.collection-section {
+  margin-bottom: 1.5rem;
+}
+.collection-section h4 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  color: #fff;
+  font-family: "LexendBold";
+}
+.collection-section p {
+  color: #e5e7eb;
+  font-size: 1.05rem;
+  font-family: "LexendLight";
+}
+.collection-action-btn {
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 2.2rem;
+  font-size: 1.1rem;
+  font-family: "LexendBold";
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 2rem;
+}
+.collection-action-btn:hover {
+  background: #2563eb;
+}
+@media (max-width: 700px) {
+  .collection-detail-root {
+    width: 100%;
+    padding: 20px 50px;
+  }
+  .collection-detail-title {
+    font-size: 1.2rem;
+  }
+  /* .collection-detail-img {
+    max-height: 180px;
+  } */
+}
+
+.image-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(
+    81,
+    83,
+    86,
+    0.75
+  ); /* light, slightly blue, semi-transparent */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+.image-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.image-modal-img {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.18);
+  background: #fff;
+}
+.image-modal-close {
+  position: absolute;
+  top: -35px;
+  right: -35px;
+  background: #fff;
+  color: #232b36;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.image-modal-close:hover {
+  background: #101820;
+  color: #fff;
+}
+@media (max-width: 700px) {
+  .image-modal-img {
+    max-width: 98vw;
+    max-height: 60vh;
+  }
+  .image-modal-close {
+    top: -18px;
+    right: -18px;
+    width: 32px;
+    height: 32px;
+    font-size: 1.5rem;
+  }
+}
+
+.about-root {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 50px 100px;
+  color: #f3f6fa;
+}
+.about-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+  color: #fff;
+  font-family: "LexendBold";
+}
+.about-section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 2.2rem 0 0.7rem 0;
+  color: #fff;
+  font-family: "LexendBold";
+}
+.about-desc {
+  color: #b0b8c9;
+  font-size: 1.08rem;
+  margin-bottom: 1.2rem;
+  font-family: "LexendLight";
+}
+.team-grid {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 220px;
+  margin-bottom: 2rem;
+}
+.team-avatar-wrapper {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #232b36;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.1rem;
+}
+.team-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background: #232b36;
+}
+.team-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.2rem;
+  font-family: "LexendBold";
+}
+.team-role {
+  color: #b0b8c9;
+  font-size: 1rem;
+  font-family: "LexendLight";
+}
+@media (max-width: 700px) {
+  .about-root {
+    padding: 20px 50px;
+  }
+  .team-grid {
+    gap: 1.2rem;
+  }
+  .team-card {
+    width: 140px;
+  }
+  .team-avatar-wrapper {
+    width: 90px;
+    height: 90px;
+  }
+}
+@media (max-width: 400px) {
+  .team-card {
+    width: 100px;
+  }
+  .team-avatar-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.card-link-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  /* background: rgba(255, 255, 255, 0.9); */
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.card-link-icon:hover {
+  transform: scale(1.1);
+  /* background: white; */
+}
+
+.card-link-icon svg {
+  width: 16px;
+  height: 16px;
+  color: #333;
 }

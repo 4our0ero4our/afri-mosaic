@@ -1,3 +1,5 @@
+"use client";
+import { FaExternalLinkAlt } from 'react-icons/fa';
 import Link from 'next/link';
 import Featured1 from '../../../public/Image/Featured1.jpg';
 import Featured2 from '../../../public/Image/Featured2.jpg';
@@ -79,6 +81,9 @@ export default function ExploreCultures() {
                         <div className="explore-info">
                             <h3>{culture.title}</h3>
                             <p>{culture.desc}</p>
+                        </div>
+                        <div className="card-link-icon">
+                            <FaExternalLinkAlt />
                         </div>
                     </Link>
                 ))}

@@ -1,4 +1,5 @@
 'use client';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Featured1 from '../../../public/Image/Featured1.jpg';
@@ -50,11 +51,16 @@ export default function FeaturedCultures() {
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: idx * 0.1, duration: 0.5 }}
-                        onClick={() => router.push(`/culture/${item.id}`)}
                     >
                         <img src={item.image.src} alt={item.title} className="explore-img" />
                         <div className="explore-info">
                             <h3>{item.title}</h3>
+                        </div>
+                        <div className="card-link-icon" onClick={(e) => {
+                            e.stopPropagation();
+                            router.push(`/culture/${item.id}`);
+                        }}>
+                            <FaExternalLinkAlt />
                         </div>
                     </motion.div>
                 ))}

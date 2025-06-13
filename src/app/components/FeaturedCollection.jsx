@@ -1,6 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 import Featured1 from '../../../public/Image/Featured1.jpg';
 import Featured2 from '../../../public/Image/Featured2.jpg';
 import Featured3 from '../../../public/Image/Featured3.jpg';
@@ -52,12 +53,17 @@ export default function FeaturedCollection() {
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: idx * 0.1, duration: 0.5 }}
-                    // onClick={() => router.push(`/collection/${item.id}`)}
                     >
                         <img src={item.image.src} alt={item.title} className="featured-img" />
                         <div className="featured-info">
                             <h3>{item.title}</h3>
                             <p>{item.shortDesc}</p>
+                        </div>
+                        <div className="card-link-icon" onClick={(e) => {
+                            e.stopPropagation();
+                            router.push(`/collection/${item.id}`);
+                        }}>
+                            <FaExternalLinkAlt />
                         </div>
                     </motion.div>
                 ))}

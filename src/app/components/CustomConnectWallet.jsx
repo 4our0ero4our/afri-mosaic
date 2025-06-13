@@ -5,12 +5,12 @@ import {
     useSuiClient,
 } from '@mysten/dapp-kit';
 import { useState, useEffect, useRef } from 'react';
+import { useWallet } from "./WalletContext";
 
 export function CustomConnectWallet() {
     const [connectModalOpen, setConnectModalOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const currentAccount = useCurrentAccount();
-    const { mutateAsync: disconnect } = useDisconnectWallet();
+    const { account, disconnect } = useWallet();
     const suiClient = useSuiClient();
     const [balance, setBalance] = useState(null);
     const dropdownRef = useRef(null);
@@ -18,10 +18,10 @@ export function CustomConnectWallet() {
     // Fetch balance when connected
     useEffect(() => {
         async function fetchBalance() {
-            if (currentAccount) {
+            if (account) {
                 try {
                     const res = await suiClient.getBalance({
-                        owner: currentAccount.address,
+                        owner: account.address,
                     });
                     setBalance(res.totalBalance / 1e9);
                 } catch (e) {
@@ -32,7 +32,7 @@ export function CustomConnectWallet() {
             }
         }
         fetchBalance();
-    }, [currentAccount, suiClient]);
+    }, [account, suiClient]);
 
     // Closes dropdown on outside click
     useEffect(() => {
@@ -54,7 +54,7 @@ export function CustomConnectWallet() {
         };
     }, [dropdownOpen]);
 
-    if (!currentAccount) {
+    if (!account) {
         return (
             <>
                 <button
@@ -103,7 +103,7 @@ export function CustomConnectWallet() {
                 }}
                 onClick={() => setDropdownOpen((open) => !open)}
             >
-                {currentAccount.address.slice(0, 6)}...{currentAccount.address.slice(-4)}
+                {account.address.slice(0, 6)}...{account.address.slice(-4)}
             </button>
             {dropdownOpen && (
                 <div
@@ -129,7 +129,7 @@ export function CustomConnectWallet() {
                     <div style={{ fontSize: "0.95rem", opacity: 0.85 }}>
                         <span style={{ fontWeight: 600 }}>Address:</span>
                         <br />
-                        {currentAccount.address.slice(0, 10)}...{currentAccount.address.slice(-6)}
+                        {account.address.slice(0, 10)}...{account.address.slice(-6)}
                     </div>
                     <div style={{ fontSize: "1.1rem", fontWeight: 700 }}>
                         {balance !== null ? (

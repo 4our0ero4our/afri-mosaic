@@ -10,8 +10,8 @@ import Link from "next/link";
 
 const navLinks = [
   { name: "Cultures", href: "/explorecultures" },
-  { name: "About", href: "/about" },
   { name: "Collections", href: "/explorecollections" },
+  { name: "About", href: "/about" },
 ];
 
 // Animation variants for staggered children
@@ -64,9 +64,9 @@ function NavbarContent() {
           </div>
           <div className="links">
             {navLinks.map((link) => (
-              <a key={link.name} href={link.href} className="link">
+              <Link key={link.name} href={link.href} className="link">
                 {link.name}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
